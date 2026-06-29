@@ -40,7 +40,17 @@ public class JwtFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 		}
 		catch (Exception e) {
+			if (e instanceof io.jsonwebtoken.ExpiredJwtException) {
+				LOG.info("EXCEPTION 401: UNAUTHORIZED. Exception in JWT FILTER : {}", e);
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				response.getWriter().write("Your session has expired. Please login again.");
+				return;
+			}
 			LOG.info("Exception in JWT FILTER : {}", e);
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			response.getWriter().write("Invalid Credentials");
+			return;
+
 		}
 
 	}

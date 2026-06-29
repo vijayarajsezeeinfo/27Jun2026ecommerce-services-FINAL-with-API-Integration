@@ -40,7 +40,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/code/{code}", method = RequestMethod.GET)
-	public UserIOResponse getUserByCode(@PathVariable("code") String code) {
+	public UserIOResponse getUserByCode(@PathVariable("code") String code) throws Exception {
 		return userDTOToIO(userService.getUserByCode(code));
 	}
 

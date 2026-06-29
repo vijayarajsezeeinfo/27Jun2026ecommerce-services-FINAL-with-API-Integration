@@ -10,7 +10,7 @@ public interface UserService {
 
 	List<UserDTO> getAllUsers(String namespaceCode);
 
-	UserDTO getUserByCode(String code);
+	UserDTO getUserByCode(String code) throws Exception;
 
 	UserDTO update(UserDTO userDTO, HttpServletRequest request);
 }

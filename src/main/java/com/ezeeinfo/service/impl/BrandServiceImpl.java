@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class BrandServiceImpl implements BrandService {
 	@Autowired
 	UserDAO userDAO;
 
+	private static final Logger LOG = LoggerFactory.getLogger(BrandServiceImpl.class);
+
 	@Override
 	public List<BrandDTO> getAllBrands(String namespaceCode) {
 		// TODO Auto-generated method stub
@@ -37,6 +41,16 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public BrandDTO update(BrandDTO brandDTO, HttpServletRequest request) {
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
 
 		brandDTO.setUpdatedBy(loggedInUser);

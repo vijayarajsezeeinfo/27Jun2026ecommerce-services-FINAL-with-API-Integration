@@ -45,9 +45,19 @@ public class AddressServiceImpl implements AddressService {
 	public AddressDTO update(AddressDTO addressDTO, HttpServletRequest request) {
 		LOG.info("Input Address : {}", addressDTO);
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
 		addressDTO.setUpdatedBy(loggedInUser);
-		UserDTO addressOwningUser = userDAO.getUserByCode(addressDTO.getUser().getCode());
+		UserDTO addressOwningUser = userDAO.getUserByCodeInternal(addressDTO.getUser().getCode());
 
 		if (!loggedInUser.getNamespace().getCode().equalsIgnoreCase(addressDTO.getNamespace().getCode())) {
 			throw new ServiceException("EXCEPTION 403: ONLY SAME NAMESPACE USER CAN SAVE/MODIFY THE USER ADDRESS");

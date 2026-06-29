@@ -76,13 +76,21 @@ public class UserServiceImpl implements UserService {
 
 		// SETTING LOGGED IN USER
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
 		userDTO.setUpdatedBy(loggedInUser);
 
 		LOG.info("Input USER in USER SERVICE IMPL after Setting updated by : {}", userDTO);
-
 		if (!userDTO.getCode().equalsIgnoreCase("null")) {
-			UserDTO dbUser = userDAO.getUserByCode(userDTO.getCode());
+			UserDTO dbUser = userDAO.getUserByCodeInternal(userDTO.getCode());
+			LOG.info("DB User {}", dbUser);
 
 			// NOBODY CAN CHANGE NAMESPACE FOR EXISTING USER
 			if (!dbUser.getNamespace().getCode().equalsIgnoreCase(userDTO.getNamespace().getCode())) {
@@ -90,7 +98,7 @@ public class UserServiceImpl implements UserService {
 			}
 
 			// ONLY ADMIN CAN CHANGE THE USER ROLE
-			if (userDTO.getRole().getId() != userDAO.getUserByCode(userDTO.getCode()).getRole().getId()) {
+			if (userDTO.getRole().getId() != dbUser.getRole().getId()) {
 				if (userDTO.getUpdatedBy().getRole().getId() != 1) {
 					throw new ServiceException("EXCEPTION 403: ONLY ADMIN CAN CHANGE THE ROLE");
 				}
@@ -108,8 +116,13 @@ public class UserServiceImpl implements UserService {
 
 			// STORING IN userCache
 			Cache<String, UserDTO> userCache = cacheManager.getCache("userCache", String.class, UserDTO.class);
-			userCache.put(updatedUser.getCode(), updatedUser);
-
+			if (updatedUser.getActiveFlag() == 9 || updatedUser.getActiveFlag() < 2) {
+				userCache.put(updatedUser.getCode(), updatedUser);
+			}
+			// if the user is deleted, removing from userCache
+			if (updatedUser.getActiveFlag() == 2) {
+				userCache.remove(updatedUser.getCode());
+			}
 			// REMOVING userListCache AFTER UPDATING USER
 			Cache<String, List> userListCache = cacheManager.getCache("userListCache", String.class, List.class);
 			userListCache.remove(updatedUser.getNamespace().getCode());

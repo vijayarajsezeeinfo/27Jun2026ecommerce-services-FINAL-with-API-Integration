@@ -98,6 +98,37 @@ public class UserDAO {
 		return userDTO;
 	}
 
+	public UserDTO getUserByCodeInternal(String code) {
+		String sql = "SELECT u.id AS user_id, u.code AS user_code, u.username AS user_username, u.password AS user_password, u.email AS user_email, u.mobile AS user_mobile, u.role AS user_role, u.namespace_id AS user_namespace_id, u.active_flag AS user_active_flag, u.updated_by AS user_updated_by, n.code AS namespace_code FROM user u LEFT JOIN namespace n ON u.namespace_id = n.id WHERE u.code=?";
+		UserDTO userDTO = null;
+		try (Connection connection = DBConfig.getInstance().getConnection(); PreparedStatement statement = connection.prepareStatement(sql);) {
+			statement.setString(1, code);
+			try (ResultSet rs = statement.executeQuery();) {
+				if (!rs.next()) {
+					throw new ServiceException("EXCEPTION 404: User Not Found. in userDAO.getUserByCodeInternal()");
+				}
+				NamespaceDTO namespaceDTO = namespaceDAO.getNamespaceByCode(rs.getString("namespace_code"));
+				UserDTO updatedBy = userDAO.getUser(rs.getInt("user_updated_by"));
+				userDTO = new UserDTO();
+				userDTO.setId(rs.getInt("user_id"));
+				userDTO.setCode(rs.getString("user_code"));
+				userDTO.setUsername(rs.getString("user_username"));
+				userDTO.setPassword(rs.getString("user_password"));
+				userDTO.setEmail(rs.getString("user_email"));
+				userDTO.setMobile(rs.getString("user_mobile"));
+				userDTO.setRole(UserRoleEM.getUserRoleEM(rs.getInt("user_role")));
+				userDTO.setNamespace(namespaceDTO);
+				userDTO.setActiveFlag(rs.getInt("user_active_flag"));
+				userDTO.setUpdatedBy(updatedBy);
+
+			}
+		}
+		catch (SQLException e) {
+			LOG.info("SQLEXCEPTION while getUserByCode. {}", e);
+		}
+		return userDTO;
+	}
+
 	public UserDTO update(UserDTO userDTO) {
 		String sql = "{CALL EZEE_SP_USER_IUD(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
@@ -176,13 +207,14 @@ public class UserDAO {
 		return userDTO;
 	}
 
-	public UserDTO login(String username, String password, String namespaceCode) {
+	public UserDTO login(String userCode, String username, String password, String namespaceCode) {
 
-		String sql = "SELECT u.id AS user_id , u.code AS user_code, u.username AS user_username, u.namespace_id AS user_namespace_id, u.password AS user_password, u.email AS user_email, mobile AS user_mobile, u.role AS user_role, u.active_flag AS user_active_flag, u.updated_by AS user_updated_by, n.code AS namespace_code FROM `user` u LEFT JOIN namespace n ON u.namespace_id=n.id WHERE u.username =? AND n.code=?";
+		String sql = "SELECT u.id AS user_id , u.code AS user_code, u.username AS user_username, u.namespace_id AS user_namespace_id, u.password AS user_password, u.email AS user_email, mobile AS user_mobile, u.role AS user_role, u.active_flag AS user_active_flag, u.updated_by AS user_updated_by, n.code AS namespace_code FROM `user` u LEFT JOIN namespace n ON u.namespace_id=n.id WHERE u.username =? AND n.code=? AND u.code=? ";
 		UserDTO userDTO = null;
 		try (Connection connection = DBConfig.getInstance().getConnection(); PreparedStatement statement = connection.prepareStatement(sql);) {
 			statement.setString(1, username);
 			statement.setString(2, namespaceCode);
+			statement.setString(3, userCode);
 			try (ResultSet rs = statement.executeQuery();) {
 				if (!rs.next()) {
 					throw new ServiceException("User " + username + " Not Found");

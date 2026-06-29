@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
 	@Autowired
 	UserDAO userDAO;
 
+	private static final Logger LOG = LoggerFactory.getLogger(ProductInventoryServiceImpl.class);
+
 	@Override
 	public List<ProductInventoryDTO> getAllProductInventories(String namespaceCode) {
 		// TODO Auto-generated method stub
@@ -38,6 +42,16 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
 	public ProductInventoryDTO update(ProductInventoryDTO productInventoryDTO, HttpServletRequest request) {
 
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
 		productInventoryDTO.setUpdatedBy(loggedInUser);
 

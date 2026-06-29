@@ -20,7 +20,7 @@ public class LoginController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public LoginResponseIO login(@RequestBody LoginRequestIO request) {
-		UserDTO userDTO = userDAO.login(request.getUsername(), request.getPassword(), request.getNamespaceCode());
+		UserDTO userDTO = userDAO.login(request.getUserCode(), request.getUsername(), request.getPassword(), request.getNamespaceCode());
 
 		String token = JwtUtil.generateToken(userDTO);
 

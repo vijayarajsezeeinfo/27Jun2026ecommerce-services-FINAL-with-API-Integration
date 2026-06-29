@@ -26,7 +26,7 @@ public class PaymentController {
 	}
 
 	@RequestMapping(value = "/code/{paymentCode}", method = RequestMethod.GET)
-	public PaymentIO getPaymentByCode(@PathVariable("paymentCode") String paymentCode) {
+	public PaymentIO getPaymentByCode(@PathVariable("paymentCode") String paymentCode) throws Exception {
 		return orderRequestController.paymentDTOToIO(paymentService.getPaymentByCode(paymentCode));
 	}
 }

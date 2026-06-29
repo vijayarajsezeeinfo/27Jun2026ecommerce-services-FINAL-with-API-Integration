@@ -52,7 +52,7 @@ public class AddressController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public AddressIO update(@RequestBody AddressIO addressIO, HttpServletRequest request) {
+	public AddressIO update(@RequestBody AddressIO addressIO, HttpServletRequest request) throws Exception {
 		LOG.info("Input Address for Save or Update : {}", addressIO);
 		AddressDTO addressDTO = addressService.update(addressIOToDTO(addressIO),request);
 		return addressDTOToIO(addressDTO);
@@ -78,7 +78,7 @@ public class AddressController {
 		return addressIO;
 	}
 
-	public AddressDTO addressIOToDTO(AddressIO addressIO) {
+	public AddressDTO addressIOToDTO(AddressIO addressIO) throws Exception {
 		LOG.info("Input for Address IO to DTO: {}", addressIO);
 		UserDTO userDTO = userDAO.getUserByCode(addressIO.getUser().getCode());
 		NamespaceDTO namespaceDTO = namespaceController.namespaceIOToDTO(addressIO.getNamespace());

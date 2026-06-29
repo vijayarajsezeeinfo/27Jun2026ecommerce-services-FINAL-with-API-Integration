@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,8 @@ public class CartItemServiceImpl implements CartItemService {
 	@Autowired
 	UserDAO userDAO;
 
+	private static final Logger LOG = LoggerFactory.getLogger(CartItemServiceImpl.class);
+
 	@Override
 	public List<CartItemDTO> getAllCartItems(String namespaceCode) {
 		return cartItemDAO.getAllCartItems(namespaceCode);
@@ -37,10 +41,20 @@ public class CartItemServiceImpl implements CartItemService {
 	public CartItemDTO update(CartItemDTO cartItemDTO, HttpServletRequest request) {
 
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
 		cartItemDTO.setUpdatedBy(loggedInUser);
 
-		UserDTO cartOwningUser = userDAO.getUserByCode(cartItemDTO.getCart().getUser().getCode());
+		UserDTO cartOwningUser = userDAO.getUserByCodeInternal(cartItemDTO.getCart().getUser().getCode());
 
 		if (loggedInUser.getId() != cartOwningUser.getId()) {
 			throw new ServiceException("EXCEPTION 403: ONLY CART OWNER CAN ADD CART ITEM");

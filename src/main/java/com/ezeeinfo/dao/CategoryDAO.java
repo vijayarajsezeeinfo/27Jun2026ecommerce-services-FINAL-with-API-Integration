@@ -104,9 +104,14 @@ public class CategoryDAO {
 
 			statement.registerOutParameter(1, Types.VARCHAR);
 			statement.registerOutParameter(7, Types.INTEGER);
+			LOG.info("Code         : {}", categoryDTO.getCode());
+			LOG.info("Name         : {}", categoryDTO.getName());
+			LOG.info("Namespace    : {}", categoryDTO.getNamespace().getCode());
+			LOG.info("Active Flag  : {}", categoryDTO.getActiveFlag());
 			statement.execute();
 			LOG.info("EZEE_SP_CATEGORY_IUD executed successfully");
 			categoryDTO.setCode(statement.getString(1));
+			LOG.info("Rows Updated : {}", statement.getInt(7));
 		}
 		catch (SQLException e) {
 			LOG.info("SQLException while executing EZEE_SP_CATEGORY_IUD. {}", e);

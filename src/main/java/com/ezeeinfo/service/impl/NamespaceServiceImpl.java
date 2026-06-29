@@ -72,8 +72,20 @@ public class NamespaceServiceImpl implements NamespaceService {
 	public NamespaceDTO update(NamespaceDTO namespaceDTO, HttpServletRequest request) {
 
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
-		namespaceDTO.setUpdatedBy(loggedInUser);
+		UserDTO updatedBy = new UserDTO();
+		updatedBy.setId(loggedInUser.getId());
+		namespaceDTO.setUpdatedBy(updatedBy);
 
 		if (loggedInUser.getRole().getId() != 0) {
 			throw new ServiceException("EXCEPTION 403: ONLY SUPER ADMIN HAS ACCESS TO SAVE OR MODIFY NAMESPACES");
@@ -81,7 +93,13 @@ public class NamespaceServiceImpl implements NamespaceService {
 
 		NamespaceDTO updatedNamespace = namespaceDAO.update(namespaceDTO);
 		if (updatedNamespace != null) {
-			redisTemplate.opsForValue().set(updatedNamespace.getCode(), updatedNamespace);
+			if (updatedNamespace.getActiveFlag() == 9 || updatedNamespace.getActiveFlag() < 2) {
+				redisTemplate.opsForValue().set(updatedNamespace.getCode(), updatedNamespace);
+			}
+			// if the namespace is deleted, removing from namespaceCacheF
+			if (updatedNamespace.getActiveFlag() == 2) {
+				redisTemplate.delete(updatedNamespace.getCode());
+			}
 			redisTemplate.delete("ALL_NAMESPACES");
 			LOG.info("Namespace cache updated and namespace list cache cleared");
 		}

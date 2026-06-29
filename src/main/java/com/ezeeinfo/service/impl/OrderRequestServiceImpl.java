@@ -38,6 +38,16 @@ public class OrderRequestServiceImpl implements OrderRequestService {
 	public OrderRequestDTO update(OrderRequestDTO orderRequestDTO, HttpServletRequest request) {
 		LOG.info("OrderRequest DTO : {}", orderRequestDTO);
 		AuthDTO authDTO = (AuthDTO) request.getAttribute("auth");
+
+		if (authDTO == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+		if (authDTO.getUser().getId() == null) {
+			LOG.info("Login not done. So AuthDTO is null");
+			throw new ServiceException("Please Login First");
+		}
+
 		UserDTO loggedInUser = userDAO.getUser(authDTO.getUser().getId());
 
 		// SETTING UPDATED BY FOR ORDERS
