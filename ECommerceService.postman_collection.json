@@ -1,0 +1,1355 @@
+{
+  "info": {
+    "_postman_id": "f2835518-db00-41eb-9dc3-f375599fbd25",
+    "name": "ECommerceService",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55068581",
+    "_collection_link": "https://go.postman.co/collection/55068581-f2835518-db00-41eb-9dc3-f375599fbd25?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Address",
+      "item": [
+        {
+          "name": "Get All Addresses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/address/FLPKT002",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "address",
+                "FLPKT002"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Address By Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/address/code/ADDR11407",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "address",
+                "code",
+                "ADDR11407"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"ADDR11407\",\r\n    \"name\": null,\r\n    \"activeFlag\": 1,\r\n    \"doorNo\": \"7\",\r\n    \"street\": \"malligai puram main road\",\r\n    \"place\": \"irudayapuram, kilapudur\",\r\n    \"city\": \"tiruchirappalli\",\r\n    \"state\": \"tamilnadu\",\r\n    \"country\": \"india\",\r\n    \"pincode\": 620001,\r\n    \"user\": {\r\n        \"code\": \"USR54604\",\r\n        \"username\": \"prakash\",\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\",\r\n            \"name\": \"amazon\",\r\n            \"activeFlag\": 1\r\n        },\r\n        \"email\": \"prakash@gmail.com\",\r\n        \"mobile\": \"+918428578348\",\r\n        \"role\": 1,\r\n        \"activeFlag\": 1\r\n    },\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\",\r\n        \"name\": \"amazon\",\r\n        \"activeFlag\": 1\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/address/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "address",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Brand",
+      "item": [
+        {
+          "name": "Get All Brands",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/brand/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "brand",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Brand By Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/brand/code/BRAND99516",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "brand",
+                "code",
+                "BRAND99516"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"BRAND99516\",\r\n    \"name\": \"mi\",\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\"\r\n    },\r\n    \"activeFlag\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/brand/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "brand",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cart Item",
+      "item": [
+        {
+          "name": "Get All Cart Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/cart-item/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "cart-item",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Cart Item By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/cart-item/code/CITEM32216",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "cart-item",
+                "code",
+                "CITEM32216"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"CITEM32216\",\r\n    \"name\": null,\r\n    \"activeFlag\": 1,\r\n    \"cart\": {\r\n        \"code\": \"CRT52383\",\r\n        \"name\": null,\r\n        \"activeFlag\": 1,\r\n        \"user\": {\r\n            \"code\": \"USR52150\",\r\n            \"namespace\": {\r\n                \"code\": \"AMZN001\",\r\n                \"name\": \"amazon\",\r\n                \"activeFlag\": 1\r\n            }\r\n        },\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\",\r\n            \"name\": \"amazon\",\r\n            \"activeFlag\": 1\r\n        }\r\n    },\r\n    \"product\": {\r\n        \"code\": \"PRODUCT22634\",\r\n        \"name\": \"xperia\",\r\n        \"activeFlag\": null,\r\n        \"description\": null,\r\n        \"price\": null,\r\n        \"brand\": null,\r\n        \"category\": null,\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\",\r\n            \"name\": \"amazon\",\r\n            \"activeFlag\": 1\r\n        }\r\n    },\r\n    \"quantity\": 1,\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\",\r\n        \"name\": \"amazon\",\r\n        \"activeFlag\": 1\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/cart-item/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "cart-item",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Get All Category",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/category/FLPKT002",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "category",
+                "FLPKT002"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/category/code/CAT82344",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "category",
+                "code",
+                "CAT82344"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\":\"CAT82344\",\r\n    \"name\":\"clothes\",\r\n    \"namespace\":{\r\n        \"code\":\"FLPKT002\"\r\n    },\r\n    \"activeFlag\":9\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/category/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "category",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();\r",
+                  "pm.environment.set(\"token\", json.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userCode\": \"USR54604\",\r\n    \"username\": \"prakash\",\r\n    \"password\": \"prakash@123\",\r\n    \"namespaceCode\": \"AMZN001\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/login/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Namespace",
+      "item": [
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"null\",\r\n    \"name\": \"snapdeal\",\r\n    \"activeFlag\": 1,\r\n    \"updatedBy\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/namespace/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "namespace",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Namespaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/namespace/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "namespace",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Namepace by Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/namespace/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "namespace",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "Place Order",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"order\": {\r\n        \"code\": \"ORDR43469\",\r\n        \"activeFlag\": 1,\r\n        \"user\": {\r\n            \"code\": \"USR54604\",\r\n            \"namespace\": {\r\n                \"code\": \"AMZN001\"\r\n            }\r\n        },\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        },\r\n        \"orderStatus\": 6,\r\n        \"orderDate\": \"2026-06-20 14:00:00\"\r\n    },\r\n    \"payment\": {\r\n        \"code\": \"null\",\r\n        \"order\": {\r\n            \"code\": \"null\",\r\n            \"activeFlag\": 1,\r\n            \"user\": {\r\n                \"code\": \"USR54604\",\r\n                \"namespace\": {\r\n                    \"code\": \"AMZN001\"\r\n                }\r\n            },\r\n            \"namespace\": {\r\n                \"code\": \"AMZN001\"\r\n            },\r\n            \"orderStatus\": 2,\r\n            \"orderDate\": \"2026-06-20 14:00:00\"\r\n        },\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        },\r\n        \"paymentMode\": 3,\r\n        \"paidAmount\": 327000,\r\n        \"balanceAmount\": 0,\r\n        \"billingStatus\": 3,\r\n        \"transactionId\": \"TRSCN7000\",\r\n        \"remarks\": \"No\"\r\n    },\r\n    \"orderItems\": [\r\n        {\r\n            \"order\": {\r\n                \"code\": \"null\",\r\n                \"activeFlag\": 1,\r\n                \"user\": {\r\n                    \"code\": \"USR54604\",\r\n                    \"namespace\": {\r\n                        \"code\": \"AMZN001\"\r\n                    }\r\n                },\r\n                \"namespace\": {\r\n                    \"code\": \"AMZN001\"\r\n                },\r\n                \"orderStatus\": 2,\r\n                \"orderDate\": \"2026-06-20 14:00:00\"\r\n            },\r\n            \"product\": {\r\n                \"code\": \"PRODUCT31177\",\r\n                \"brand\": {\r\n                    \"code\": \"BRAND68503\",\r\n                    \"namespace\": {\r\n                        \"code\": \"AMZN001\"\r\n                    }\r\n                },\r\n                \"category\": {\r\n                    \"code\": \"CAT78431\",\r\n                    \"namespace\": {\r\n                        \"code\": \"AMZN001\"\r\n                    }\r\n                },\r\n                \"namespace\": {\r\n                    \"code\": \"AMZN001\"\r\n                }\r\n            },\r\n            \"quantity\": 2,\r\n            \"namespace\": {\r\n                \"code\": \"AMZN001\"\r\n            }\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/order/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "order",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/order/code/ORDR82783",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "order",
+                "code",
+                "ORDR82783"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Orders",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/order/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "order",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Get All Payments",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/payment/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "payment",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payment By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/payment/code/PYMT87286",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "payment",
+                "code",
+                "PYMT87286"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "Get All Products",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"BRAND68503\",\r\n    \"name\": \"sony\",\r\n    \"namespaceIO\": {\r\n        \"code\": \"AMZN001\"\r\n    },\r\n    \"activeFlag\": 9,\r\n    \"updatedBy\": 1\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/product/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "product",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/product/code/PRODUCT22634",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "product",
+                "code",
+                "PRODUCT22634"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"PRODUCT22634\",\r\n    \"name\": \"xperia\",\r\n    \"description\": \"real phone\",\r\n    \"price\": 40000.0,\r\n    \"brand\": {\r\n        \"code\": \"BRAND22697\",\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        }\r\n    },\r\n    \"category\": {\r\n        \"code\": \"CAT78431\",\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        }\r\n    },\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\",\r\n        \"name\":\"amazon\",\r\n        \"activeFlag\":1\r\n    },\r\n    \"activeFlag\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/product/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "product",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter By Name and Price and Namespace Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/product/filter?name=a&price=50000&namespaceCode=AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "product",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "a"
+                },
+                {
+                  "key": "price",
+                  "value": "50000"
+                },
+                {
+                  "key": "namespaceCode",
+                  "value": "AMZN001"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product Feign Client",
+      "item": [
+        {
+          "name": "Get All Products",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/ecommerce-client/feign/product/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "ecommerce-client",
+                "feign",
+                "product",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"null\",\r\n    \"name\": \"bravia\",\r\n    \"activeFlag\": 1,\r\n    \"description\": \"real tv\",\r\n    \"price\": 55000.0,\r\n    \"brand\": {\r\n        \"code\": \"BRAND68503\",\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        }\r\n    },\r\n    \"category\": {\r\n        \"code\": \"CAT78431\",\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        }\r\n    },\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/ecommerce-client/feign/product/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "ecommerce-client",
+                "feign",
+                "product",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/ecommerce-client/feign/product/code/PRODUCT38227",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "ecommerce-client",
+                "feign",
+                "product",
+                "code",
+                "PRODUCT38227"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get from other Server and Save / Update / Delete / Re-Activate",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/ecommerce-client/feign/product/save/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "ecommerce-client",
+                "feign",
+                "product",
+                "save",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ProductInventory",
+      "item": [
+        {
+          "name": "Get All Product Inventory",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/pi/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "pi",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product Inventory By Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"BRAND68503\",\r\n    \"name\": \"sony\",\r\n    \"namespaceIO\": {\r\n        \"code\": \"AMZN001\"\r\n    },\r\n    \"activeFlag\": 9,\r\n    \"updatedBy\": 1\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/pi/code/PINV53820",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "pi",
+                "code",
+                "PINV53820"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"PINV13622\",\r\n    \"activeFlag\": 1,\r\n    \"product\": {\r\n        \"code\": \"PRODUCT31177\",\r\n        \"brand\": {\r\n            \"code\": \"BRAND68503\",\r\n            \"namespace\": {\r\n                \"code\": \"AMZN001\"\r\n            }\r\n        },\r\n        \"category\": {\r\n            \"code\": \"CAT78431\",\r\n            \"namespace\": {\r\n                \"code\": \"AMZN001\"\r\n            }\r\n        },\r\n        \"namespace\": {\r\n            \"code\": \"AMZN001\"\r\n        }\r\n    },\r\n    \"availableQuantity\": 10,\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/pi/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "pi",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/user/AMZN001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "user",
+                "AMZN001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by Code",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/user/code/USR65561",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "user",
+                "code",
+                "USR65561"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save / Update / Delete / Re-Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"USR19906\",\r\n    \"username\": \"pingal\",\r\n    \"password\": \"pingal@123\",\r\n    \"email\": \"pingal@gmail.com\",\r\n    \"mobile\": \"+917428578319\",\r\n    \"role\": 3,\r\n    \"namespace\": {\r\n        \"code\": \"AMZN001\"\r\n    },\r\n    \"activeFlag\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/ecommerce-services/user/update",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "ecommerce-services",
+                "user",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "supabase_service_role_api_key_10jg",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0m2v",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0jft",
+      "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_11k3",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0pgo",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_06n9",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0iz4",
+      "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_10uy",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_10jg",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_17g0",
+      "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_15n5",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_0zx3",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_02rp",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0yzv",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_15jm",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0gig",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_10uy",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_11k3",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_03l2",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_18l9",
+      "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_02mc",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0cyt",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_0naq",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_19ao",
+      "value": ""
+    },
+    {
+      "key": "supabase_service_role_api_key_13kr",
+      "value": ""
+    }
+  ]
+}
